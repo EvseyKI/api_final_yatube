@@ -103,6 +103,7 @@ class Comment(models.Model):
     def __str__(self):
         return self.text[:settings.LENGTH_TEXT]
 
+
 class Follow(models.Model):
     user = models.ForeignKey(
         User,

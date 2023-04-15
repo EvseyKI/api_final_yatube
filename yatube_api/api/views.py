@@ -24,6 +24,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = (IsAuthorOrReadOnly,)
 
+
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes = (IsAuthorOrReadOnly,)
@@ -36,6 +37,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.get_post().comments.all()
+
 
 class FollowViewSet(viewsets.ModelViewSet):
     serializer_class = FollowSerializer
