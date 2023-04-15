@@ -102,3 +102,22 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text[:settings.LENGTH_TEXT]
+
+class Follow(models.Model):
+    user = models.ForeignKey(
+        User,
+        related_name='follower',
+        on_delete=models.CASCADE,
+        verbose_name='Подписчик',
+        help_text='Пользователь, который подписался',
+    )
+    following = models.ForeignKey(
+        User,
+        related_name='following',
+        on_delete=models.CASCADE,
+        verbose_name='Автор',
+        help_text='Пользователь, на которого подписались',
+    )
+
+    def __str__(self):
+        return f'{self.user} подписался на {self.following}'
