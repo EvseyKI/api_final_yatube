@@ -120,5 +120,19 @@ class Follow(models.Model):
         help_text='Пользователь, на которого подписались',
     )
 
+    class Meta:
+        verbose_name = 'Подписка',
+        verbose_name_plural = 'Подписки'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'following'],
+                name='unique_user_following'
+            ),
+            models.CheckConstraint(
+                check=~models.Q(user=models.F('following')),
+                name='check_self_follow',
+            ),
+        ]
+
     def __str__(self):
         return f'{self.user} подписался на {self.following}'
